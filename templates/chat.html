@@ -23,13 +23,42 @@
 
     <div class="topbar">
 
-        <div class="app-name">
-            WhisperBox
+        <div>
+
+            <div class="app-name">
+                WhisperBox
+            </div>
+
+            <div id="status">
+                Online
+            </div>
+
         </div>
 
-        <a href="/logout" class="logout-btn">
-            Logout
-        </a>
+        <div class="top-actions">
+
+            <button
+                id="darkToggle"
+                onclick="toggleDarkMode()"
+            >
+                🌙
+            </button>
+
+            <a
+                href="/users"
+                class="logout-btn"
+            >
+                Users
+            </a>
+
+            <a
+                href="/logout"
+                class="logout-btn"
+            >
+                Logout
+            </a>
+
+        </div>
 
     </div>
 
@@ -89,6 +118,8 @@
         {% endfor %}
 
     </div>
+
+    <div id="typing"></div>
 
     <div class="message-box">
 

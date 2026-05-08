@@ -192,13 +192,11 @@ def chat():
     )
 
 
-@app.route('/logout')
+@app.route('/users')
 @login_required
-def logout():
-
-    logout_user()
-
-    return redirect(url_for('login'))
+def users():
+    all_users = User.query.all()
+    return render_template('users.html', users=all_users)
 
 
 @app.route(
@@ -269,6 +267,13 @@ def upload():
 
 
 @socketio.on('message')
+@socketio.on('typing')
+def typing(data):
+
+    socketio.emit(
+        'typing',
+        data
+    )
 def handle_message(data):
 
     username = data['username']

@@ -1,330 +1,97 @@
-* {
+#status {
 
-    margin: 0;
+    font-size: 12px;
 
-    padding: 0;
+    color: #86efac;
 
-    box-sizing: border-box;
-
-    font-family: Arial, sans-serif;
+    margin-top: 4px;
 
 }
 
-body {
+#typing {
 
-    background: #e5ddd5;
+    padding-left: 15px;
 
-    height: 100vh;
-
-}
-
-.auth-container {
-
-    width: 90%;
-
-    max-width: 350px;
-
-    margin: 80px auto;
-
-    background: white;
-
-    padding: 30px;
-
-    border-radius: 16px;
-
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-
-}
-
-.auth-container h1 {
-
-    text-align: center;
-
-    margin-bottom: 25px;
-
-}
-
-.auth-container input {
-
-    width: 100%;
-
-    padding: 14px;
-
-    margin-bottom: 15px;
-
-    border: 1px solid #ccc;
-
-    border-radius: 10px;
-
-}
-
-.auth-container button {
-
-    width: 100%;
-
-    padding: 14px;
-
-    border: none;
-
-    border-radius: 10px;
-
-    background: #111827;
-
-    color: white;
-
-    cursor: pointer;
-
-}
-
-.auth-container p {
-
-    margin-top: 15px;
-
-    text-align: center;
-
-}
-
-.chat-app {
-
-    display: flex;
-
-    flex-direction: column;
-
-    height: 100vh;
-
-}
-
-.topbar {
-
-    background: #111827;
-
-    color: white;
-
-    padding: 16px;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    position: sticky;
-
-    top: 0;
-
-    z-index: 100;
-
-}
-
-.app-name {
-
-    font-size: 20px;
-
-    font-weight: bold;
-
-}
-
-.logout-btn {
-
-    color: white;
-
-    text-decoration: none;
-
-    font-size: 14px;
-
-}
-
-#messages {
-
-    flex: 1;
-
-    overflow-y: auto;
-
-    padding: 15px;
-
-    display: flex;
-
-    flex-direction: column;
-
-}
-
-.my-message,
-.other-message {
-
-    max-width: 75%;
-
-    padding: 12px;
-
-    border-radius: 16px;
-
-    margin-bottom: 12px;
-
-    word-wrap: break-word;
-
-}
-
-.my-message {
-
-    align-self: flex-end;
-
-    background: #dcf8c6;
-
-}
-
-.other-message {
-
-    align-self: flex-start;
-
-    background: white;
-
-}
-
-.message-user {
+    padding-bottom: 5px;
 
     font-size: 13px;
-
-    font-weight: bold;
-
-    margin-bottom: 5px;
-
-    color: #374151;
-
-}
-
-.message-text {
-
-    font-size: 16px;
-
-    color: #111827;
-
-}
-
-.message-footer {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    margin-top: 8px;
-
-}
-
-.message-time {
-
-    font-size: 11px;
 
     color: gray;
 
 }
 
-.delete-btn {
-
-    background: rgba(239, 68, 68, 0.08);
-
-    border: 1px solid rgba(239, 68, 68, 0.15);
-
-    color: #dc2626;
-
-    padding: 6px 12px;
-
-    border-radius: 20px;
-
-    font-size: 11px;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition: all 0.2s ease;
-
-    backdrop-filter: blur(4px);
-
-}
-
-.delete-btn:hover {
-
-    background: rgba(239, 68, 68, 0.15);
-
-    transform: scale(1.03);
-
-}
-
-.delete-btn:active {
-
-    transform: scale(0.97);
-
-}
-
-.chat-image {
-
-    width: 100%;
-
-    max-width: 250px;
-
-    border-radius: 12px;
-
-    margin-top: 8px;
-
-}
-
-.message-box {
+.top-actions {
 
     display: flex;
 
-    padding: 10px;
+    align-items: center;
 
-    background: white;
-
-    border-top: 1px solid #ddd;
-
-    position: sticky;
-
-    bottom: 0;
+    gap: 12px;
 
 }
 
-.message-box input[type="text"] {
+#darkToggle {
 
-    flex: 1;
-
-    padding: 14px;
-
-    border-radius: 30px;
-
-    border: 1px solid #ccc;
-
-    outline: none;
-
-    font-size: 16px;
-
-}
-
-#imageInput {
-
-    width: 90px;
-
-    margin-left: 10px;
-
-}
-
-.message-box button {
-
-    margin-left: 10px;
-
-    width: 50px;
+    background: transparent;
 
     border: none;
-
-    border-radius: 50%;
-
-    background: #111827;
 
     color: white;
 
     font-size: 18px;
 
     cursor: pointer;
+
+}
+
+.dark-mode {
+
+    background: #0f172a;
+
+}
+
+.dark-mode #messages {
+
+    background: #0f172a;
+
+}
+
+.dark-mode .other-message {
+
+    background: #1e293b;
+
+}
+
+.dark-mode .message-text {
+
+    color: white;
+
+}
+
+.dark-mode .message-user {
+
+    color: #cbd5e1;
+
+}
+
+.dark-mode .topbar {
+
+    background: #020617;
+
+}
+
+.dark-mode .message-box {
+
+    background: #111827;
+
+}
+
+.dark-mode input {
+
+    background: #1e293b;
+
+    color: white;
+
+    border: 1px solid #334155;
 
 }
