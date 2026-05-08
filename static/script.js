@@ -1,31 +1,50 @@
 const socket = io();
 
-if (Notification.permission !== 'granted') {
+window.onload = function () {
 
-    Notification.requestPermission();
-}
+    const messageInput =
+        document.getElementById('message');
 
-const messageInput =
-    document.getElementById('message');
+    if (Notification.permission !== 'granted') {
 
-messageInput.addEventListener(
-
-    'input',
-
-    () => {
-
-        socket.emit(
-
-            'typing',
-
-            {
-                username: USERNAME
-            }
-        );
+        Notification.requestPermission();
     }
-);
+
+    messageInput.addEventListener(
+
+        'input',
+
+        () => {
+
+            socket.emit(
+
+                'typing',
+
+                {
+                    username: USERNAME
+                }
+            );
+        }
+    );
+
+    messageInput.addEventListener(
+
+        'keypress',
+
+        function(event) {
+
+            if (event.key === 'Enter') {
+
+                sendMessage();
+            }
+        }
+    );
+};
 
 function sendMessage() {
+
+    let messageInput =
+        document.getElementById('message');
 
     let imageInput =
         document.getElementById('imageInput');
@@ -131,19 +150,6 @@ socket.on(
                 ).innerHTML = '';
 
             }, 1500);
-        }
-    }
-);
-
-messageInput.addEventListener(
-
-    'keypress',
-
-    function(event) {
-
-        if (event.key === 'Enter') {
-
-            sendMessage();
         }
     }
 );
