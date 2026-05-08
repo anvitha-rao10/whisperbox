@@ -5,6 +5,11 @@
 
     <title>WhisperBox</title>
 
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <link
         rel="stylesheet"
         href="/static/style.css"
@@ -14,52 +19,44 @@
 
 <body>
 
-<div class="chat-wrapper">
+<div class="chat-app">
 
-    <div class="sidebar">
+    <div class="topbar">
 
-        <h2>WhisperBox</h2>
-
-        <div class="user-info">
-
-            Logged in as
-
-            <strong>{{ username }}</strong>
-
+        <div class="app-name">
+            WhisperBox
         </div>
-
-        <a href="/logout" class="logout-btn">
-            Logout
-        </a>
 
     </div>
 
-    <div class="chat-container">
+    <div id="messages">
 
-        <div class="chat-header">
-            Private Chat
-        </div>
+        {% for message in messages %}
 
-        <div id="messages">
+        <div
+            class="
+                {% if message.username == username %}
+                    my-message
+                {% else %}
+                    other-message
+                {% endif %}
+            "
+            id="message-{{ message.id }}"
+        >
 
-            {% for message in messages %}
+            <div class="message-user">
+                {{ message.username }}
+            </div>
 
-            <div
-                class="message"
-                id="message-{{ message.id }}"
-            >
+            <div class="message-text">
+                {{ message.text }}
+            </div>
 
-                <div class="message-user">
-                    {{ message.username }}
-                </div>
+            <div class="message-footer">
 
-                <div class="message-text">
-                    {{ message.text }}
-                </div>
-
-                <div class="message-time">
+                <span class="message-time">
                     {{ message.timestamp.strftime('%H:%M') }}
-                </div>
+                </span>
 
                 <button
                     class="delete-btn"
@@ -70,23 +67,23 @@
 
             </div>
 
-            {% endfor %}
-
         </div>
 
-        <div class="message-box">
+        {% endfor %}
 
-            <input
-                type="text"
-                id="message"
-                placeholder="Type a message"
-            >
+    </div>
 
-            <button onclick="sendMessage()">
-                Send
-            </button>
+    <div class="message-box">
 
-        </div>
+        <input
+            type="text"
+            id="message"
+            placeholder="Type a message"
+        >
+
+        <button onclick="sendMessage()">
+            ➤
+        </button>
 
     </div>
 
