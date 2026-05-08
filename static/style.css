@@ -221,15 +221,39 @@ body {
 
 .delete-btn {
 
-    background: transparent;
+    background: rgba(239, 68, 68, 0.08);
 
-    border: none;
+    border: 1px solid rgba(239, 68, 68, 0.15);
 
-    color: #ef4444;
+    color: #dc2626;
 
-    font-size: 12px;
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    font-weight: 600;
 
     cursor: pointer;
+
+    transition: all 0.2s ease;
+
+    backdrop-filter: blur(4px);
+
+}
+
+.delete-btn:hover {
+
+    background: rgba(239, 68, 68, 0.15);
+
+    transform: scale(1.03);
+
+}
+
+.delete-btn:active {
+
+    transform: scale(0.97);
 
 }
 
