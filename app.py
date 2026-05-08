@@ -22,6 +22,8 @@ from werkzeug.security import check_password_hash
 
 from datetime import datetime
 
+import os
+
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'whisperbox_secret'
@@ -29,6 +31,15 @@ app.config['SECRET_KEY'] = 'whisperbox_secret'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///whisperbox.db'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+UPLOAD_FOLDER = 'static/uploads'
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+os.makedirs(
+    UPLOAD_FOLDER,
+    exist_ok=True
+)
 
 db = SQLAlchemy(app)
 
@@ -74,7 +85,12 @@ class Message(db.Model):
 
     text = db.Column(
         db.String(1000),
-        nullable=False
+        nullable=True
+    )
+
+    image = db.Column(
+        db.String(300),
+        nullable=True
     )
 
     timestamp = db.Column(
@@ -209,6 +225,49 @@ def delete_message(message_id):
     })
 
 
+@app.route(
+    '/upload',
+    methods=['POST']
+)
+@login_required
+def upload():
+
+    image = request.files['image']
+
+    text = request.form.get('text')
+
+    filename = image.filename
+
+    image.save(
+
+        os.path.join(
+
+            app.config['UPLOAD_FOLDER'],
+
+            filename
+
+        )
+    )
+
+    new_message = Message(
+
+        username=current_user.username,
+
+        text=text,
+
+        image=filename
+
+    )
+
+    db.session.add(new_message)
+
+    db.session.commit()
+
+    return jsonify({
+        'success': True
+    })
+
+
 @socketio.on('message')
 def handle_message(data):
 
@@ -253,8 +312,6 @@ if __name__ == '__main__':
 
         host='0.0.0.0',
 
-        port=5000,
-
-        debug=True
+        port=5000
 
     )

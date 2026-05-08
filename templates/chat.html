@@ -27,6 +27,10 @@
             WhisperBox
         </div>
 
+        <a href="/logout" class="logout-btn">
+            Logout
+        </a>
+
     </div>
 
     <div id="messages">
@@ -48,9 +52,22 @@
                 {{ message.username }}
             </div>
 
+            {% if message.image %}
+
+            <img
+                src="/static/uploads/{{ message.image }}"
+                class="chat-image"
+            >
+
+            {% endif %}
+
+            {% if message.text %}
+
             <div class="message-text">
                 {{ message.text }}
             </div>
+
+            {% endif %}
 
             <div class="message-footer">
 
@@ -79,6 +96,12 @@
             type="text"
             id="message"
             placeholder="Type a message"
+        >
+
+        <input
+            type="file"
+            id="imageInput"
+            accept="image/*"
         >
 
         <button onclick="sendMessage()">
