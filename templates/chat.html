@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>WhisperBox</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
+
+</head>
+
+<body>
+
+<div class="chat-wrapper">
+
+    <div class="sidebar">
+
+        <h2>WhisperBox</h2>
+
+        <div class="user-info">
+
+            Logged in as
+
+            <strong>{{ username }}</strong>
+
+        </div>
+
+        <a href="/logout" class="logout-btn">
+            Logout
+        </a>
+
+    </div>
+
+    <div class="chat-container">
+
+        <div class="chat-header">
+            Private Chat
+        </div>
+
+        <div id="messages">
+
+            {% for message in messages %}
+
+            <div
+                class="message"
+                id="message-{{ message.id }}"
+            >
+
+                <div class="message-user">
+                    {{ message.username }}
+                </div>
+
+                <div class="message-text">
+                    {{ message.text }}
+                </div>
+
+                <div class="message-time">
+                    {{ message.timestamp.strftime('%H:%M') }}
+                </div>
+
+                <button
+                    class="delete-btn"
+                    onclick="deleteMessage({{ message.id }})"
+                >
+                    Delete
+                </button>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <div class="message-box">
+
+            <input
+                type="text"
+                id="message"
+                placeholder="Type a message"
+            >
+
+            <button onclick="sendMessage()">
+                Send
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    const USERNAME = "{{ username }}";
+
+</script>
+
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+
+<script src="/static/script.js"></script>
+
+</body>
+
+</html>
