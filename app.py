@@ -111,40 +111,6 @@ def home():
     return redirect(url_for('login'))
 
 
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-
-    if request.method == 'POST':
-
-        username = request.form['username']
-
-        password = request.form['password']
-
-        existing_user = User.query.filter_by(
-            username=username
-        ).first()
-
-        if existing_user:
-
-            return 'Username already exists'
-
-        hashed_password = generate_password_hash(
-            password
-        )
-
-        new_user = User(
-            username=username,
-            password=hashed_password
-        )
-
-        db.session.add(new_user)
-
-        db.session.commit()
-
-        return redirect(url_for('login'))
-
-    return render_template('register.html')
-
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -155,14 +121,40 @@ def login():
 
         password = request.form['password']
 
-        user = User.query.filter_by(
-            username=username
-        ).first()
+        users = {
 
-        if user and check_password_hash(
-            user.password,
-            password
+            'Bubu': 'Anvitha',
+
+            'Dudu': 'Surya'
+
+        }
+
+        if (
+            username in users and
+            users[username] == password
         ):
+
+            user = User.query.filter_by(
+                username=username
+            ).first()
+
+            if not user:
+
+                hashed_password = generate_password_hash(
+                    password
+                )
+
+                user = User(
+
+                    username=username,
+
+                    password=hashed_password
+
+                )
+
+                db.session.add(user)
+
+                db.session.commit()
 
             login_user(user)
 
