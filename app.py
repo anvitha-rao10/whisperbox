@@ -111,7 +111,6 @@ def home():
     return redirect(url_for('login'))
 
 
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 
@@ -184,11 +183,13 @@ def chat():
     )
 
 
-@app.route('/users')
+@app.route('/logout')
 @login_required
-def users():
-    all_users = User.query.all()
-    return render_template('users.html', users=all_users)
+def logout():
+
+    logout_user()
+
+    return redirect(url_for('login'))
 
 
 @app.route(
@@ -259,13 +260,6 @@ def upload():
 
 
 @socketio.on('message')
-@socketio.on('typing')
-def typing(data):
-
-    socketio.emit(
-        'typing',
-        data
-    )
 def handle_message(data):
 
     username = data['username']
@@ -296,13 +290,15 @@ def handle_message(data):
 
     }, broadcast=True)
 
-@app.route('/logout')
-@login_required
-def logout():
 
-    logout_user()
+@socketio.on('typing')
+def typing(data):
 
-    return redirect(url_for('login'))
+    socketio.emit(
+        'typing',
+        data
+    )
+
 
 if __name__ == '__main__':
 
